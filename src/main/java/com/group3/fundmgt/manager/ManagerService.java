@@ -1,5 +1,6 @@
 package com.group3.fundmgt.manager;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,6 +11,7 @@ public class ManagerService {
 
     private final ManagerRepository managerRepository;
 
+    @Autowired
     public ManagerService(ManagerRepository managerRepository) {
         this.managerRepository = managerRepository;
     }
