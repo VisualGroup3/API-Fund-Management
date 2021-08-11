@@ -1,5 +1,6 @@
 package com.group3.fundmgt.manager;
 
+import com.group3.fundmgt.position.Position;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,4 +28,6 @@ public class ManagerService {
         }
         return manager.get();
     }
+
+
 }
