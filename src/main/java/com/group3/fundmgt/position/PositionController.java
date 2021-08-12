@@ -6,19 +6,19 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path="/api/FounManager/position")
+@RequestMapping(path="/api/FounManager/positions")
 public class PositionController {
 
     @Autowired
     private PositionService positionService;
 
-    @PostMapping(path="/addPosition")
+    @PostMapping
     public void addPosition(@RequestBody Position position){
         System.out.println(position.toString());
         positionService.addPosition(position);
     }
 
-    @GetMapping(path="/getPositions")
+    @GetMapping
     public List<Position> getPositions(){
         List<Position> positions=positionService.getPositions();
         for(Position p:positions){
@@ -27,14 +27,14 @@ public class PositionController {
         return positions;
     }
 
-    @GetMapping(path="/getPosition/{positionId}")
+    @GetMapping(path="{positionId}")
     public Position getPositions(@PathVariable("positionId") Long id){
         Position position=positionService.getPosition(id);
         System.out.println(position.toString());
         return position;
     }
 
-    @DeleteMapping(path="/delete/{positionId}")
+    @DeleteMapping(path="{positionId}")
     public void deletePosition(@PathVariable("positionId") Long id){
         System.out.println("delete");
         positionService.deletePosition(id);
