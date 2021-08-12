@@ -27,7 +27,7 @@ public class FundmgtApplication {
             List<Manager> managers = List.of(
                     new Manager(1L, "Chris", "Gardner"),
                     new Manager(2L, "Frank", "Abagnale")
-            );:
+            );
             managerRepository.saveAll(managers);
 
             /*存入2个position*/
