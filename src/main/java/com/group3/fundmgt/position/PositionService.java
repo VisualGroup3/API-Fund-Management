@@ -5,6 +5,7 @@ import com.group3.fundmgt.manager.ManagerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,7 +48,19 @@ public class PositionService {
         }
     }
 
-    public void updatePosition(){
+    @Transactional
+    public void updatePosition(Long id, Position updatePosition){
+        Optional<Position> positionOptional = positionRepository.findById(id);
+        if(positionOptional.isEmpty()){
+            throw new PositionNotFoundException(id);
+        }
+        Position position=positionOptional.get();
+        //check id
+        if (updatePosition.getId() != null && updatePosition.getId() != position.getId()){
+            //TODO USe custom exception.
+            throw new IllegalStateException("Position ID in path and in request body are different.");
+        }
 
+        //check
     }
 }
