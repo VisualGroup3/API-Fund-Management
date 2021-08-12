@@ -44,25 +44,26 @@ public class FundmgtApplication {
 
 
             List<Fund> funds=List.of(
-                    new Fund(Long.valueOf(1),"111",new ArrayList<>(), managers.get(0)),
+                    new Fund(Long.valueOf(1),"technology select",new ArrayList<>(), managers.get(0)),
                     new Fund(Long.valueOf(2), "222",new ArrayList<>(), managers.get(1))
             );
             fundRepository.saveAll(funds);
 
+            /*存入2个position*/
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            List<Position> positions=List.of(
+                    new Position("TSLA",100, LocalDate.parse("2021-08-11",dtf),funds.get(0)),
+                    new Position("FB", 150, LocalDate.parse("2021-08-08",dtf),funds.get(0))
+            );
+            positionRepository.saveAll(positions);
+
             List<Security> securities = List.of(
-                    new Security(1, "Chris"),
-                    new Security(2, "Frank"),
+                    new Security(1, "TSLA"),
+                    new Security(2, "FB"),
                     new Security(3, "like")
             );
             securityRepository.saveAll(securities);
 
-            /*存入2个position*/
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            List<Position> positions=List.of(
-                    new Position(Long.valueOf(1),100, LocalDate.parse("2021-08-11",dtf),funds.get(0)),
-                    new Position(Long.valueOf(2), 150, LocalDate.parse("2021-08-08",dtf),funds.get(1))
-            );
-            positionRepository.saveAll(positions);
         };
     }
 

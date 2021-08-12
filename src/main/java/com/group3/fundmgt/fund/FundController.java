@@ -1,5 +1,7 @@
 package com.group3.fundmgt.fund;
 
+import com.group3.fundmgt.manager.Manager;
+import com.group3.fundmgt.position.Position;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,20 +24,27 @@ public class FundController {
     // 2.查：根据id查询记录
     @GetMapping(value = "{fundId}")
     public Fund getFund(@PathVariable("fundId") Long fundId){
+        System.out.println(fundService.getFund(fundId).toString());
         return fundService.getFund(fundId);
     }
 
     // 3.增加记录
-    @PostMapping(value = "{fundName}")
-    public List<Fund> addFund(@PathVariable("fundName") String fundName){
-        return fundService.addFund(fundName);
+    @PostMapping
+    public void addFund(@RequestBody Fund fund){
+
+        System.out.println(fund.toString());
+        fundService.addFund(fund);
     }
 
     // 4.根据id，删除记录
     @DeleteMapping(value = "{fundId}")
-    public List<Fund> deleteById(@PathVariable("fundId") Long fundId){
-        return fundService.deleteById(fundId);
+    public void deleteById(@PathVariable("fundId") Long fundId){
+         fundService.deleteById(fundId);
     }
 
-    // 5.多表查询，涉及到join相关操作
+    @PutMapping("{fundId}")
+    public void updateManager(@PathVariable("fundId") Long id,
+                              @RequestBody Fund fund) {
+        fundService.updateFund(id, fund);
+    }
 }
