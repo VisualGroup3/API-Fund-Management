@@ -32,8 +32,7 @@ public class FundmgtApplication {
 
     @Bean
 
-
-    CommandLineRunner commandLineRunner(ManagerRepository managerRepository, FundRepository fundRepository, PositionRepository positionRepository, SecurityRepository securityRepository) {
+    CommandLineRunner commandLineRunner(ManagerRepository managerRepository, PositionRepository positionRepository, SecurityRepository securityRepository,FundRepository fundRepository) {
 
         return args -> {
             /*存入2个manager*/
