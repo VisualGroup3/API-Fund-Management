@@ -8,7 +8,7 @@ import javax.persistence.*;
 public class Manager {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer employeeId;
+    private Long employeeId;
 
     @Column(nullable = false)
     private String firstName;
@@ -19,7 +19,7 @@ public class Manager {
 
     public Manager() { }
 
-    public Manager(Integer employeeId, String firstName, String lastName) {
+    public Manager(Long employeeId, String firstName, String lastName) {
         this.employeeId = employeeId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -30,11 +30,11 @@ public class Manager {
         this.lastName = lastName;
     }
 
-    public Integer getEmployeeId() {
+    public Long getEmployeeId() {
         return employeeId;
     }
 
-    public void setEmployeeId(Integer employeeId) {
+    public void setEmployeeId(Long employeeId) {
         this.employeeId = employeeId;
     }
 

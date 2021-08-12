@@ -2,19 +2,16 @@ package com.group3.fundmgt.manager;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping(path="/api/v1/managers")
+@RequestMapping("/api/v1/managers")
 public class ManagerController {
     private final ManagerService managerService;
 
-    @Autowired
+
     public ManagerController(ManagerService managerService) {
         this.managerService = managerService;
     }
@@ -24,8 +21,25 @@ public class ManagerController {
         return managerService.getManagers();
     }
     
-    @GetMapping(path="{employeeId}")
-    public Manager getManager(@PathVariable("employeeId") Integer employeeId) {
+    @GetMapping("{employeeId}")
+    public Manager getManager(@PathVariable("employeeId") Long employeeId) {
         return managerService.getManager(employeeId);
     }
+
+    @PostMapping()
+    public Manager createNewManager(@RequestBody Manager manager) {
+        return managerService.createNewManager(manager);
+    }
+
+    @PutMapping("{employeeId}")
+    public Manager updateManager(@PathVariable("employeeId") Long employeeId,
+                              @RequestBody Manager manager) {
+        return managerService.updateManager(employeeId, manager);
+    }
+
+    @DeleteMapping("{employeeId}")
+    public Manager deleteManager(@PathVariable("employeeId") Long employeeId) {
+        return managerService.deleteManager(employeeId);
+    }
+
 }
