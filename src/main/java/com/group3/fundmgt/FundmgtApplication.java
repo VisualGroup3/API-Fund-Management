@@ -33,20 +33,20 @@ public class FundmgtApplication {
     @Bean
 
 
-    CommandLineRunner commandLineRunner(ManagerRepository managerRepository, PositionRepository positionRepository, SecurityRepository securityRepository) {
+    CommandLineRunner commandLineRunner(ManagerRepository managerRepository, FundRepository fundRepository, PositionRepository positionRepository, SecurityRepository securityRepository) {
 
         return args -> {
             /*存入2个manager*/
             List<Manager> managers = List.of(
-                    new Manager(1L, "Chris", "Gardner"),
-                    new Manager(2L, "Frank", "Abagnale")
+                    new Manager(1L, "Chris", "Gardner", new ArrayList<>()),
+                    new Manager(2L, "Frank", "Abagnale", new ArrayList<>())
             );
             managerRepository.saveAll(managers);
 
 
             List<Fund> funds=List.of(
-                    new Fund(Long.valueOf(1),"111",new ArrayList<>()),
-                    new Fund(Long.valueOf(2), "222",new ArrayList<>())
+                    new Fund(Long.valueOf(1),"111",new ArrayList<>(), managers.get(0)),
+                    new Fund(Long.valueOf(2), "222",new ArrayList<>(), managers.get(1))
             );
             fundRepository.saveAll(funds);
 

@@ -1,6 +1,7 @@
 package com.group3.fundmgt.fund;
 
 import com.fasterxml.jackson.annotation.*;
+import com.group3.fundmgt.manager.Manager;
 import com.group3.fundmgt.position.Position;
 
 import javax.persistence.*;
@@ -28,18 +29,25 @@ public class Fund {
 
     private List<Position> positionList;
 
+    @JsonIgnore
+    @ManyToOne(optional = false, cascade={CascadeType.MERGE,CascadeType.REFRESH})
+    @JoinColumn(name = "manager_employeeId")
+    private Manager manager;
+
     // 2.生成构造方法
     public Fund(){}
 
-    public Fund(Long fundId, String name, List<Position> positionList) {
+    public Fund(Long fundId, String name, List<Position> positionList, Manager manager) {
         this.fundId = fundId;
         this.name = name;
         this.positionList = positionList;
+        this.manager = manager;
     }
 
-    public Fund(String name, List<Position> positionList) {
+    public Fund(String name, List<Position> positionList, Manager manager) {
         this.name = name;
         this.positionList = positionList;
+        this.manager = manager;
     }
 
     public Fund(String name) {
@@ -69,6 +77,14 @@ public class Fund {
 
     public void setPositionList(List<Position> positionList) {
         this.positionList = positionList;
+    }
+
+    public Manager getManager() {
+        return manager;
+    }
+
+    public void setManager(Manager manager) {
+        this.manager = manager;
     }
 
     @Override

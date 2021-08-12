@@ -1,7 +1,10 @@
 package com.group3.fundmgt.manager;
 
 
+import com.group3.fundmgt.fund.Fund;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table
@@ -16,18 +19,22 @@ public class Manager {
     @Column(nullable = false)
     private String lastName;
 
+    @OneToMany(mappedBy = "manager", cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+    private List<Fund> funds;
 
     public Manager() { }
 
-    public Manager(Long employeeId, String firstName, String lastName) {
+    public Manager(Long employeeId, String firstName, String lastName, List<Fund> funds) {
         this.employeeId = employeeId;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.funds = funds;
     }
 
-    public Manager(String firstName, String lastName) {
+    public Manager(String firstName, String lastName, List<Fund> funds) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.funds = funds;
     }
 
     public Long getEmployeeId() {
@@ -52,6 +59,14 @@ public class Manager {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public List<Fund> getFunds() {
+        return funds;
+    }
+
+    public void setFunds(List<Fund> funds) {
+        this.funds = funds;
     }
 
     @Override
