@@ -1,5 +1,7 @@
 package com.group3.fundmgt;
 
+import com.group3.fundmgt.Securities.Security;
+import com.group3.fundmgt.Securities.SecurityRepository;
 import com.group3.fundmgt.manager.Manager;
 import com.group3.fundmgt.manager.ManagerRepository;
 import com.group3.fundmgt.position.Position;
@@ -8,6 +10,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.annotation.Order;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -21,7 +25,8 @@ public class FundmgtApplication {
     }
 
     @Bean
-    CommandLineRunner commandLineRunner(ManagerRepository managerRepository, PositionRepository positionRepository) {
+
+    CommandLineRunner commandLineRunner(ManagerRepository managerRepository, PositionRepository positionRepository, SecurityRepository securityRepository) {
         return args -> {
             /*存入2个manager*/
             List<Manager> managers = List.of(
@@ -29,6 +34,13 @@ public class FundmgtApplication {
                     new Manager(2L, "Frank", "Abagnale")
             );
             managerRepository.saveAll(managers);
+
+            List<Security> securities = List.of(
+                    new Security(1, "Chris"),
+                    new Security(2, "Frank"),
+                    new Security(3, "like")
+            );
+            securityRepository.saveAll(securities);
 
             /*存入2个position*/
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -39,4 +51,5 @@ public class FundmgtApplication {
             positionRepository.saveAll(positions);
         };
     }
+
 }
