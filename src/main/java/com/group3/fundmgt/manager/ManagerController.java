@@ -25,7 +25,7 @@ public class ManagerController {
     }
     
     @GetMapping(path="{employeeId}")
-    public Manager getManager(@PathVariable("employeeId") Integer employeeId) {
+    public Manager getManager(@PathVariable("employeeId") Long employeeId) {
         return managerService.getManager(employeeId);
     }
 }

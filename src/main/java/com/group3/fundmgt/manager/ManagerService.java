@@ -21,7 +21,7 @@ public class ManagerService {
         return managerRepository.findAll();
     }
 
-    public Manager getManager(Integer employeeId) {
+    public Manager getManager(Long employeeId) {
         Optional<Manager> manager = managerRepository.findById(employeeId);
         if (manager.isEmpty()) {
             throw new ManagerNotFoundException(employeeId);

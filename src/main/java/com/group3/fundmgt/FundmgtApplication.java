@@ -25,9 +25,9 @@ public class FundmgtApplication {
         return args -> {
             /*存入2个manager*/
             List<Manager> managers = List.of(
-                    new Manager(1, "Chris", "Gardner"),
-                    new Manager(2, "Frank", "Abagnale")
-            );
+                    new Manager(1L, "Chris", "Gardner"),
+                    new Manager(2L, "Frank", "Abagnale")
+            );:
             managerRepository.saveAll(managers);
 
             /*存入2个position*/
