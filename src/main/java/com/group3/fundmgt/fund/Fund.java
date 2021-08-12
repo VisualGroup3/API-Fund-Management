@@ -20,12 +20,10 @@ public class Fund {
     private String name;
 
 
-    //避免无限递归//
     @OneToMany(mappedBy = "fund",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
     //级联保存、更新、删除、刷新;延迟加载。当删除用户，会级联删除该用户的所有文章
     //拥有mappedBy注解的实体类为关系被维护端
     //mappedBy="fund"中的fund是Position中的fund属性
-
     private List<Position> positionList;
 
     // 2.生成构造方法
