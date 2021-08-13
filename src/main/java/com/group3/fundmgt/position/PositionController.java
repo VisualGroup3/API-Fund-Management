@@ -13,9 +13,9 @@ public class PositionController {
     @Autowired
     private PositionService positionService;
 
-    @PostMapping(path="{positionId}")
+    @PostMapping
     public void addPosition(@RequestBody Position position){
-        System.out.println(position.toString());
+        System.out.println(position.getQuantity());
         positionService.addPosition(position);
     }
 
@@ -41,7 +41,7 @@ public class PositionController {
         positionService.deletePosition(id);
     }
 
-    @PutMapping("/updatePosition/{positionId}")
+    @PutMapping("{positionId}")
     public void updatePosition(@PathVariable("positionId") Long positionId,
                               @RequestBody Position position) {
         positionService.updatePosition(positionId, position);

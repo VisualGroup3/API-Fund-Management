@@ -19,7 +19,12 @@ public class SecurityService {
     public List<Security> listAll(){
         return repo.findAll();
     }
+
     public void save(Security security){
+        Optional<Security> securityOptional=repo.findSecuritiesBySymbol(security.getSymbol());
+        if(!securityOptional.isEmpty()){
+            throw new IllegalArgumentException("security with symbol "+security.getSymbol()+" already existed");
+        }
         repo.save(security);
     }
 

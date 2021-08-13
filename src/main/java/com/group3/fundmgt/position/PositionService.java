@@ -1,5 +1,7 @@
 package com.group3.fundmgt.position;
 
+import com.group3.fundmgt.Securities.Security;
+import com.group3.fundmgt.Securities.SecurityRepository;
 import com.group3.fundmgt.manager.Manager;
 import com.group3.fundmgt.manager.ManagerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,12 +15,15 @@ import java.util.Optional;
 @Service
 public class PositionService {
 
-    @Autowired
+
     private final PositionRepository positionRepository;
+    private final SecurityRepository securityRepository;
+
 
     @Autowired
-    public PositionService(PositionRepository positionRepository) {
+    public PositionService(PositionRepository positionRepository,SecurityRepository securityRepository) {
         this.positionRepository = positionRepository;
+        this.securityRepository=securityRepository;
     }
 
     public List<Position> getPositions(){
@@ -36,8 +41,17 @@ public class PositionService {
 
     public void addPosition(Position position){
         //查security是否存在,需要先写security
-
+        if(position.getQuantity()<0){
+            throw new IllegalArgumentException("quantity can't be negative");
+        }
+        Optional<Security> security=securityRepository.findSecuritiesBySymbol(position.getSecuritySymbol());
+        if(security.isEmpty()){
+            throw new IllegalArgumentException("security with symbol "+position.getSecuritySymbol()+" not found");
+        }
         positionRepository.save(position);
+//        String symble=securityRepository.getById()
+//        if(position.getSecuritySymbol())
+
     }
 
     public void deletePosition(Long id){

@@ -31,21 +31,23 @@ public class FundmgtApplication {
     }
 
     @Bean
-
     CommandLineRunner commandLineRunner(ManagerRepository managerRepository, PositionRepository positionRepository, SecurityRepository securityRepository,FundRepository fundRepository) {
 
         return args -> {
             /*存入2个manager*/
             List<Manager> managers = List.of(
                     new Manager("Chris", "Gardner", new ArrayList<>()),
-                    new Manager("Frank", "Abagnale", new ArrayList<>())
+                    new Manager("Frank", "Abagnale", new ArrayList<>()),
+                    new Manager("Bernard ", "Madoff", new ArrayList<>())
             );
             managerRepository.saveAll(managers);
 
 
             List<Fund> funds=List.of(
-                    new Fund("technology select sector",new ArrayList<>(), managers.get(0)),
-                    new Fund( "industrial select sector",new ArrayList<>(), managers.get(0))
+                    new Fund("technology select sector fund",new ArrayList<>(), managers.get(0)),
+                    new Fund( "communication services select sector fund",new ArrayList<>(), managers.get(0)),
+                    new Fund( "industrial select sector fund",new ArrayList<>(), managers.get(1))
+
             );
             fundRepository.saveAll(funds);
 
@@ -53,14 +55,18 @@ public class FundmgtApplication {
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             List<Position> positions=List.of(
                     new Position("TSLA",100, LocalDate.parse("2021-08-11",dtf),funds.get(0)),
-                    new Position("FB", 150, LocalDate.parse("2021-08-08",dtf),funds.get(0))
+                    new Position("FB", 150, LocalDate.parse("2021-08-08",dtf),funds.get(0)),
+                    new Position("NFLX", 200, LocalDate.parse("2021-08-09",dtf),funds.get(1)),
+                    new Position("NFLX", 150, LocalDate.parse("2021-08-10",dtf),funds.get(1)),
+                    new Position("GE", 50, LocalDate.parse("2021-08-10",dtf),funds.get(2))
             );
             positionRepository.saveAll(positions);
 
             List<Security> securities = List.of(
                     new Security( "TSLA"),
                     new Security("FB"),
-                    new Security( "like")
+                    new Security( "NFLX"),
+                    new Security( "GE")
             );
             securityRepository.saveAll(securities);
 

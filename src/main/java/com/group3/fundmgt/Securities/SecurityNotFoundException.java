@@ -7,8 +7,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class SecurityNotFoundException extends IllegalArgumentException{
     private final Integer securityId;
 
+
     public SecurityNotFoundException(Integer securityId) {
         super("Fund manager with employee id " + securityId + " not found.");
         this.securityId = securityId;
     }
+
 }

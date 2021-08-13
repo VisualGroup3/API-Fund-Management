@@ -51,6 +51,7 @@ public class FundService {
         if (!fundToUpdateOptional.isPresent()) {
             throw new ManagerNotFoundException(id);
         }
+
         Fund fundToUpdate = fundToUpdateOptional.get();
         if (fundToUpdate.getFundId() != null && fundToUpdate.getFundId() != f.getFundId()){
             //TODO USe custom exception.
