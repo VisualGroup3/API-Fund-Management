@@ -39,8 +39,8 @@ public class FundController {
 
     // 4.根据id，删除记录
     @DeleteMapping(value = "/deleteById/{fundId}")
-    public List<Fund> deleteById(@PathVariable("fundId") Long fundId){
-        return fundService.deleteById(fundId);
+    public void deleteById(@PathVariable("fundId") Long fundId){
+        fundService.deleteById(fundId);
     
     }
 
