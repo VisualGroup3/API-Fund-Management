@@ -21,26 +21,26 @@ public class ManagerController {
         return managerService.getManagers();
     }
     
-    @GetMapping("/getManager/{employeeId}")
+    @GetMapping("{employeeId}")
     public Manager getManager(@PathVariable("employeeId") Long employeeId) {
         return managerService.getManager(employeeId);
     }
 
 
-    @PostMapping(path="/createNewManager")
-    public Manager createNewManager(@RequestBody Manager manager) {
-        return managerService.createNewManager(manager);
+    @PostMapping
+    public void createNewManager(@RequestBody Manager manager) {
+         managerService.createNewManager(manager);
     }
 
-    @PutMapping("/updateManager/{employeeId}")
-    public Manager updateManager(@PathVariable("employeeId") Long employeeId, @RequestBody Manager manager) {
+    @PutMapping("{employeeId}")
+    public void updateManager(@PathVariable("employeeId") Long employeeId, @RequestBody Manager manager) {
          managerService.updateManager(employeeId, manager);
     }
 
 
-    @DeleteMapping("/deleteManager/{employeeId}")
-    public Manager deleteManager(@PathVariable("employeeId") Long employeeId) {
-        return managerService.deleteManager(employeeId);
+    @DeleteMapping("{employeeId}")
+    public void deleteManager(@PathVariable("employeeId") Long employeeId) {
+         managerService.deleteManager(employeeId);
 
     }
 

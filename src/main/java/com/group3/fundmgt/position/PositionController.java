@@ -13,7 +13,7 @@ public class PositionController {
     @Autowired
     private PositionService positionService;
 
-    @PostMapping(path="/createNewPosition/{positionId}")
+    @PostMapping(path="{positionId}")
     public void addPosition(@RequestBody Position position){
         System.out.println(position.toString());
         positionService.addPosition(position);
@@ -28,14 +28,14 @@ public class PositionController {
         return positions;
     }
 
-    @GetMapping(path="/getPositions/{positionId}")
+    @GetMapping(path="{positionId}")
     public Position getPositions(@PathVariable("positionId") Long id){
         Position position=positionService.getPosition(id);
         System.out.println(position.toString());
         return position;
     }
 
-    @DeleteMapping(path="/deletePosition/{positionId}")
+    @DeleteMapping(path="{positionId}")
     public void deletePosition(@PathVariable("positionId") Long id){
         System.out.println("delete");
         positionService.deletePosition(id);
