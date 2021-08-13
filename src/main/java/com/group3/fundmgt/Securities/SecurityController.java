@@ -20,8 +20,7 @@ public class SecurityController {
     //Restful API for Retrieval Operation
     @GetMapping
     public List<Security> listSecurity(){
-        List<Security> s = securityService.listAll();
-        return s;
+        return securityService.listAll();
     }
 
     @GetMapping(path="{securityId}")

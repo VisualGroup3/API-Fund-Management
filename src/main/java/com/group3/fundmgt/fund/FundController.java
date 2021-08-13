@@ -22,28 +22,30 @@ public class FundController {
     public List<Fund> getFund(){return fundService.getFund();}
 
     // 2.查：根据id查询记录
-    @GetMapping(value = "{fundId}")
+    @GetMapping(value = "/getFund/{fundId}")
     public Fund getFund(@PathVariable("fundId") Long fundId){
         System.out.println(fundService.getFund(fundId).toString());
         return fundService.getFund(fundId);
     }
 
     // 3.增加记录
-    @PostMapping
+    @PostMapping(value = "/createFund")
     public void addFund(@RequestBody Fund fund){
 
         System.out.println(fund.toString());
         fundService.addFund(fund);
     }
 
+
     // 4.根据id，删除记录
-    @DeleteMapping(value = "{fundId}")
-    public void deleteById(@PathVariable("fundId") Long fundId){
-         fundService.deleteById(fundId);
+    @DeleteMapping(value = "/deleteById/{fundId}")
+    public List<Fund> deleteById(@PathVariable("fundId") Long fundId){
+        return fundService.deleteById(fundId);
+    
     }
 
-    @PutMapping("{fundId}")
-    public void updateManager(@PathVariable("fundId") Long id,
+    @PutMapping("/updateFund/{fundId}")
+    public void updateFund(@PathVariable("fundId") Long id,
                               @RequestBody Fund fund) {
         fundService.updateFund(id, fund);
     }

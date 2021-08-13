@@ -49,6 +49,10 @@ public class FundmgtApplication {
             );
             fundRepository.saveAll(funds);
 
+
+            
+
+
             /*存入2个position*/
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             List<Position> positions=List.of(
@@ -56,13 +60,13 @@ public class FundmgtApplication {
                     new Position("FB", 150, LocalDate.parse("2021-08-08",dtf),funds.get(0))
             );
             positionRepository.saveAll(positions);
-
             List<Security> securities = List.of(
-                    new Security(1, "TSLA"),
-                    new Security(2, "FB"),
-                    new Security(3, "like")
+                    new Security(1, "IBM"),
+                    new Security(2, "SNY")
             );
             securityRepository.saveAll(securities);
+
+
 
         };
     }
