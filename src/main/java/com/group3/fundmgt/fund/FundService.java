@@ -1,8 +1,7 @@
 package com.group3.fundmgt.fund;
 
-import com.group3.fundmgt.manager.Manager;
-import com.group3.fundmgt.manager.ManagerNotFoundException;
-import com.group3.fundmgt.position.PositionNotFoundException;
+import com.group3.fundmgt.exception.BadRequestException;
+import com.group3.fundmgt.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +24,7 @@ public class FundService {
     public Fund getFund(Long fundId){
         Optional<Fund> fund = fundRepository.findById(fundId);
         if (fund.isEmpty()){
-            throw new FundNotFoundException(fundId);
+            throw new NotFoundException("Fund  with  fundID " + fundId + " not found.");
         }
         return fund.get();
     }
@@ -41,7 +40,7 @@ public class FundService {
             fundRepository.deleteById(fundId);
         }
         else{
-            throw new FundNotFoundException(fundId);
+            throw new NotFoundException("Fund  with  fundID " + fundId + " not found.");
         }
     }
 
@@ -49,13 +48,13 @@ public class FundService {
     public void updateFund(Long id, Fund f) {
         Optional<Fund> fundToUpdateOptional = this.fundRepository.findById(id);
         if (!fundToUpdateOptional.isPresent()) {
-            throw new ManagerNotFoundException(id);
+            throw new NotFoundException("Fund  with  fundID " + id + " not found.");
         }
 
         Fund fundToUpdate = fundToUpdateOptional.get();
         if (fundToUpdate.getFundId() != null && fundToUpdate.getFundId() != f.getFundId()){
             //TODO USe custom exception.
-            throw new IllegalStateException("FundId in path and in request body are different.");
+            throw new BadRequestException("FundId in path and in request body are different.");
         }
         if(f.getName()!=null){
             fundToUpdate.setName(f.getName());

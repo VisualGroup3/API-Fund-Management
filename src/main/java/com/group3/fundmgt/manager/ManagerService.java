@@ -1,8 +1,7 @@
 package com.group3.fundmgt.manager;
 
-import com.group3.fundmgt.position.Position;
-import com.group3.fundmgt.position.PositionNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.group3.fundmgt.exception.BadRequestException;
+import com.group3.fundmgt.exception.NotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,7 +25,7 @@ public class ManagerService {
     public Manager getManager(Long employeeId) {
         Optional<Manager> manager = this.managerRepository.findById(employeeId);
         if (manager.isEmpty()) {
-            throw new ManagerNotFoundException(employeeId);
+            throw new NotFoundException("Fund manager with employeeID " + employeeId + " not found.");
         }
         return manager.get();
     }
@@ -40,12 +39,12 @@ public class ManagerService {
     public void updateManager(Long id, Manager m) {
         Optional<Manager> managerToUpdateOptional = this.managerRepository.findById(id);
         if (!managerToUpdateOptional.isPresent()) {
-            throw new ManagerNotFoundException(id);
+            throw new NotFoundException("Fund manager with employeeID " + id + " not found.");
         }
         Manager managerToUpdate = managerToUpdateOptional.get();
         if (managerToUpdate.getEmployeeId() != null && managerToUpdate.getEmployeeId() != m.getEmployeeId()){
             //TODO USe custom exception.
-            throw new IllegalStateException("EmployeeId in path and in request body are different.");
+            throw new BadRequestException("employeeID in path and in request body are different.");
         }
 
         if (m.getFirstName() != null) {
@@ -63,7 +62,7 @@ public class ManagerService {
             this.managerRepository.deleteById(employeeId);
         }
         else{
-            throw new ManagerNotFoundException(employeeId);
+            throw new NotFoundException("Fund manager with employeeID " + employeeId + " not found.");
         }
     }
 

@@ -27,6 +27,7 @@ public class Fund {
     //mappedBy="fund"中的fund是Position中的fund属性
     private List<Position> positionList;
 
+    //避免无限递归//
     @JsonIgnore
     @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH})
     //可选属性optional=false,表示manager不能为空。
@@ -86,13 +87,14 @@ public class Fund {
         this.manager = manager;
     }
 
-    @Override
-    public String toString() {
-        return "Fund{" +
-                "fundId=" + fundId +
-                ", name='" + name + '\'' +
-                ", positionList=" + positionList +
-                ", manager=" + manager +
-                '}';
-    }
+//删除toString方法避免无限递归
+//    @Override
+//    public String toString() {
+//        return "Fund{" +
+//                "fundId=" + fundId +
+//                ", name='" + name + '\'' +
+//                ", positionList=" + positionList +
+//                ", manager=" + manager +
+//                '}';
+//    }
 }

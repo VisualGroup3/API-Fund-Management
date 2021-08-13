@@ -91,6 +91,7 @@ public class Position {
         this.securitySymbol = securitySymbol;
     }
 
+    //删除toString方法避免无限递归
     //    @Override
 //    public String toString() {
 //        return "Position{" +

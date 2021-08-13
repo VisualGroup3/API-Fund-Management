@@ -2,6 +2,8 @@ package com.group3.fundmgt.position;
 
 import com.group3.fundmgt.Securities.Security;
 import com.group3.fundmgt.Securities.SecurityRepository;
+import com.group3.fundmgt.exception.BadRequestException;
+import com.group3.fundmgt.exception.NotFoundException;
 import com.group3.fundmgt.manager.Manager;
 import com.group3.fundmgt.manager.ManagerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,27 +28,25 @@ public class PositionService {
         this.securityRepository=securityRepository;
     }
 
-    public List<Position> getPositions(){
-        return positionRepository.findAll();
+    public List<Position> getPositionsByFundID(Long fundID){
+        return positionRepository.getPositionByFundID(fundID);
     }
 
     public Position getPosition(Long id){
         Optional<Position> position = positionRepository.findById(id);
         //查Position是否存在
         if(position.isEmpty()){
-            throw new PositionNotFoundException(id);
+            throw new NotFoundException("Position with position id " + id + " not found.");
         }
         return position.get();
     }
 
     public void addPosition(Position position){
-        //查security是否存在,需要先写security
-        if(position.getQuantity()<0){
-            throw new IllegalArgumentException("quantity can't be negative");
-        }
+
+        //查security是否存在
         Optional<Security> security=securityRepository.findSecuritiesBySymbol(position.getSecuritySymbol());
         if(security.isEmpty()){
-            throw new IllegalArgumentException("security with symbol "+position.getSecuritySymbol()+" not found");
+            throw new BadRequestException("security with symbol "+position.getSecuritySymbol()+" not found");
         }
         positionRepository.save(position);
 //        String symble=securityRepository.getById()
@@ -59,7 +59,7 @@ public class PositionService {
             positionRepository.deleteById(id);
         }
         else{
-            throw new PositionNotFoundException(id);
+            throw new NotFoundException("Position with position id " + id + " not found.");
         }
     }
 
@@ -67,7 +67,7 @@ public class PositionService {
     public void updatePosition(Long id, Position updatePosition){
         Optional<Position> positionOptional = positionRepository.findById(id);
         if(positionOptional.isEmpty()){
-            throw new PositionNotFoundException(id);
+            throw new NotFoundException("Position with position id " + id + " not found.");
         }
         Position position=positionOptional.get();
         //check id
@@ -83,12 +83,7 @@ public class PositionService {
             position.setSecuritySymbol(updatePosition.getSecuritySymbol());
         }
         //quantity
-        if(updatePosition.getQuantity()<=0){
-            throw new IllegalArgumentException("quantity can't be negative");
-        }else {
-            position.setQuantity(updatePosition.getQuantity());
-        }
-
+        position.setQuantity(updatePosition.getQuantity());
         //purchase date
         position.setDatePurchased(updatePosition.getDatePurchased());
     }

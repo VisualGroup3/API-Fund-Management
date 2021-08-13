@@ -1,5 +1,6 @@
 package com.group3.fundmgt.position;
 
+import com.group3.fundmgt.exception.BadRequestException;
 import com.group3.fundmgt.manager.Manager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,16 +16,18 @@ public class PositionController {
 
     @PostMapping
     public void addPosition(@RequestBody Position position){
-        System.out.println(position.getQuantity());
+        if(position.getQuantity()<=0){
+            throw new BadRequestException("quantity can't be negative");
+        }
         positionService.addPosition(position);
     }
 
     @GetMapping
-    public List<Position> getPositions(){
-        List<Position> positions=positionService.getPositions();
-        for(Position p:positions){
-            System.out.println(p.toString());
-        }
+    public List<Position> getPositionsByFundID(@RequestParam Long fundID){
+        List<Position> positions=positionService.getPositionsByFundID(fundID);
+//        for(Position p:positions){
+//            System.out.println(p.toString());
+//        }
         return positions;
     }
 
@@ -44,6 +47,9 @@ public class PositionController {
     @PutMapping("{positionId}")
     public void updatePosition(@PathVariable("positionId") Long positionId,
                               @RequestBody Position position) {
+        if(position.getQuantity()<=0){
+            throw new BadRequestException("quantity can't be negative");
+        }
         positionService.updatePosition(positionId, position);
     }
 }
