@@ -50,9 +50,8 @@ public class FundmgtApplication {
             fundRepository.saveAll(funds);
 
             List<Security> securities = List.of(
-                    new Security(1, "Chris"),
-                    new Security(2, "Frank"),
-                    new Security(3, "like")
+                    new Security(1, "IBM"),
+                    new Security(2, "SNY")
             );
             securityRepository.saveAll(securities);
 

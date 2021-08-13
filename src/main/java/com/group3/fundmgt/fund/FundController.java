@@ -20,19 +20,19 @@ public class FundController {
     public List<Fund> getFund(){return fundService.getFund();}
 
     // 2.查：根据id查询记录
-    @GetMapping(value = "{fundId}")
+    @GetMapping(value = "/getFund/{fundId}")
     public Fund getFund(@PathVariable("fundId") Long fundId){
         return fundService.getFund(fundId);
     }
 
     // 3.增加记录
-    @PostMapping(value = "{fundName}")
+    @PostMapping(value = "/createFund/{fundName}")
     public List<Fund> addFund(@PathVariable("fundName") String fundName){
         return fundService.addFund(fundName);
     }
 
     // 4.根据id，删除记录
-    @DeleteMapping(value = "{fundId}")
+    @DeleteMapping(value = "/deleteById/{fundId}")
     public List<Fund> deleteById(@PathVariable("fundId") Long fundId){
         return fundService.deleteById(fundId);
     }
