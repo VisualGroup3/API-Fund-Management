@@ -37,15 +37,15 @@ public class FundmgtApplication {
         return args -> {
             /*存入2个manager*/
             List<Manager> managers = List.of(
-                    new Manager("Chris", "Gardner", new ArrayList<>()),
-                    new Manager("Frank", "Abagnale", new ArrayList<>())
+                    new Manager(1L, "Chris", "Gardner", new ArrayList<>()),
+                    new Manager(2L, "Frank", "Abagnale", new ArrayList<>())
             );
             managerRepository.saveAll(managers);
 
 
             List<Fund> funds=List.of(
-                    new Fund("technology select",new ArrayList<>(), managers.get(0)),
-                    new Fund("industrial select",new ArrayList<>(), managers.get(0))
+                    new Fund(Long.valueOf(1),"technology select",new ArrayList<>(), managers.get(0)),
+                    new Fund(Long.valueOf(2), "222",new ArrayList<>(), managers.get(1))
             );
             fundRepository.saveAll(funds);
 
@@ -58,9 +58,9 @@ public class FundmgtApplication {
             positionRepository.saveAll(positions);
 
             List<Security> securities = List.of(
-                    new Security( "TSLA"),
-                    new Security( "FB"),
-                    new Security( "NFLX")
+                    new Security(1, "TSLA"),
+                    new Security(2, "FB"),
+                    new Security(3, "like")
             );
             securityRepository.saveAll(securities);
 
