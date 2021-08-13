@@ -17,6 +17,10 @@ public class Security {
         this.symbol = symbol;
     }
 
+    public Security(String symbol) {
+        this.symbol = symbol;
+    }
+
     public Security() {
 
     }
