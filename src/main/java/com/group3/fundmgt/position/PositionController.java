@@ -41,8 +41,8 @@ public class PositionController {
         positionService.deletePosition(id);
     }
 
-    @PutMapping("{positionId}")
-    public void updateManager(@PathVariable("positionId") Long positionId,
+    @PutMapping("/updatePosition/{positionId}")
+    public void updatePosition(@PathVariable("positionId") Long positionId,
                               @RequestBody Position position) {
         positionService.updatePosition(positionId, position);
     }
