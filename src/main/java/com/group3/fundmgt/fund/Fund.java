@@ -28,7 +28,8 @@ public class Fund {
     private List<Position> positionList;
 
     @JsonIgnore
-    @ManyToOne(optional = false, cascade={CascadeType.MERGE,CascadeType.REFRESH})
+    @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH})
+    //可选属性optional=false,表示manager不能为空。
     @JoinColumn(name = "manager_employeeId")
     private Manager manager;
 
@@ -91,6 +92,7 @@ public class Fund {
                 "fundId=" + fundId +
                 ", name='" + name + '\'' +
                 ", positionList=" + positionList +
+                ", manager=" + manager +
                 '}';
     }
 }

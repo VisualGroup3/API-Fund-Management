@@ -18,24 +18,24 @@ public class SecurityController {
     }
 
     //Restful API for Retrieval Operation
-    @GetMapping(path="/getSecurities")
+    @GetMapping
     public List<Security> listSecurity(){
         return securityService.listAll();
     }
 
-    @GetMapping(path="/getSecurities/{securityId}")
+    @GetMapping(path="{securityId}")
     public Security getSecurities(@PathVariable("securityId") Integer id) {
         return securityService.get(id);
     }
 
     //Create
-    @PostMapping(path="/createSecurity")
+    @PostMapping
     public void createSecurity(@RequestBody Security security){
         securityService.save(security);
     }
 
     //update
-    @PutMapping(path="/updateSecurities/{securityId}")
+    @PutMapping(path="{securityId}")
     public List<Security> updateSecurities(@RequestBody Security security, @PathVariable("securityId") Integer id){
         Security existSecurity = securityService.get(id);
         if(security.getSecurityId() == existSecurity.getSecurityId()){
@@ -45,7 +45,7 @@ public class SecurityController {
     }
 
     //delete
-    @DeleteMapping(path="/deleteSecurity/{securityId}")
+    @DeleteMapping(path="{securityId}")
     public List<Security> deleteSecurity(@PathVariable("securityId") Integer id){
         securityService.delete(id);
         System.out.println("delete successfully");

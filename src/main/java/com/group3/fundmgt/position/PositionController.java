@@ -1,5 +1,6 @@
 package com.group3.fundmgt.position;
 
+import com.group3.fundmgt.manager.Manager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,5 +39,11 @@ public class PositionController {
     public void deletePosition(@PathVariable("positionId") Long id){
         System.out.println("delete");
         positionService.deletePosition(id);
+    }
+
+    @PutMapping("{positionId}")
+    public void updateManager(@PathVariable("positionId") Long positionId,
+                              @RequestBody Position position) {
+        positionService.updatePosition(positionId, position);
     }
 }

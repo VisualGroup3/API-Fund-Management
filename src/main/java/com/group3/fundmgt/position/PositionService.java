@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -61,6 +62,20 @@ public class PositionService {
             throw new IllegalStateException("Position ID in path and in request body are different.");
         }
 
-        //check
+        //securitySymble
+        if (updatePosition.getSecuritySymbol() != null &&
+                !Objects.equals(updatePosition.getSecuritySymbol(), position.getSecuritySymbol()) &&
+                updatePosition.getSecuritySymbol().length() > 0){
+            position.setSecuritySymbol(updatePosition.getSecuritySymbol());
+        }
+        //quantity
+        if(updatePosition.getQuantity()<=0){
+            throw new IllegalArgumentException("quantity can't be negative");
+        }else {
+            position.setQuantity(updatePosition.getQuantity());
+        }
+
+        //purchase date
+        position.setDatePurchased(updatePosition.getDatePurchased());
     }
 }

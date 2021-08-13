@@ -1,5 +1,8 @@
 package com.group3.fundmgt.fund;
 
+import com.group3.fundmgt.manager.Manager;
+import com.group3.fundmgt.manager.ManagerNotFoundException;
+import com.group3.fundmgt.position.PositionNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,18 +31,35 @@ public class FundService {
     }
 
     // 3.增加记录
-    public List<Fund> addFund(String fundName) {
-        Fund fund = new Fund(fundName);
+    public void addFund(Fund fund) {
         fundRepository.save(fund);
-        return fundRepository.findAll();
     }
 
     // 4.根据id，删除记录
-    public List<Fund> deleteById(Long fundId) {
-        fundRepository.deleteById(fundId);
-        return fundRepository.findAll();
+    public void deleteById(Long fundId) {
+        if(fundRepository.existsById(fundId)){
+            fundRepository.deleteById(fundId);
+        }
+        else{
+            throw new FundNotFoundException(fundId);
+        }
     }
 
-    // 5.多表查询，涉及到join相关操作
+    // 5.update
+    public void updateFund(Long id, Fund f) {
+        Optional<Fund> fundToUpdateOptional = this.fundRepository.findById(id);
+        if (!fundToUpdateOptional.isPresent()) {
+            throw new ManagerNotFoundException(id);
+        }
+        Fund fundToUpdate = fundToUpdateOptional.get();
+        if (fundToUpdate.getFundId() != null && fundToUpdate.getFundId() != f.getFundId()){
+            //TODO USe custom exception.
+            throw new IllegalStateException("FundId in path and in request body are different.");
+        }
+        if(f.getName()!=null){
+            fundToUpdate.setName(f.getName());
+        }
+        this.fundRepository.save(fundToUpdate);
+    }
 
 }

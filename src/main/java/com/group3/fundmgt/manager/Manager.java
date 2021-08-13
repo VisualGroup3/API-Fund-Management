@@ -71,10 +71,11 @@ public class Manager {
 
     @Override
     public String toString() {
-        return "FundManager{" +
+        return "Manager{" +
                 "employeeId=" + employeeId +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", funds=" + funds +
                 '}';
     }
 }
