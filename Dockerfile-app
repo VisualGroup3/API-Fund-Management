@@ -7,3 +7,4 @@ RUN sh -c 'echo spring.datasource.username=root    >> application.properties'
 RUN sh -c 'echo spring.datasource.password=c0nygre >> application.properties'
 
 ENTRYPOINT ["java","-jar","/app.jar"]
+
