@@ -33,5 +33,5 @@ build/
 .vscode/
 
 ### Local MySQL Password ###
-src/main/resources/application.properties
+/src/main/resources/application.properties
 
