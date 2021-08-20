@@ -23,7 +23,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-app
-    env_file: ./.env
     image: app:1.0.0
     links:
       - mysql:mysql
