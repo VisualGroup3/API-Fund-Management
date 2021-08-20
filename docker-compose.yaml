@@ -28,8 +28,6 @@ services:
       - "8081:8080"
     depends_on:
       - "mysql"
-
-
 #    environment:
 #      db_host: mysql
 #      db_name: fundmgt
