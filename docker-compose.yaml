@@ -27,9 +27,9 @@ services:
     ports:
       - "8081:8080"
     environment:
-      db_host: mysql
-      db_name: fundmgt
-      db_username: root
-      db_password: c0nygre
+      - db_host=mysql
+      - db_name=fundmgt
+      - db_username=root
+      - db_password=c0nygre
     depends_on:
       - "mysql"
