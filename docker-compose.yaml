@@ -14,7 +14,7 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: c0nygre
-      MYSQL_DATABASE:
+      MYSQL_DATABASE: fundmgt
 
     command: --explicit_defaults_for_timestamp
 
