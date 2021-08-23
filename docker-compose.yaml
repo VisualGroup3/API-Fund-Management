@@ -28,6 +28,6 @@ services:
     links:
       - mysql:mysql
     ports:
-      - $SPRING_HOST_PORT:$SPRING_DOCKER_PORTe
+      - $SPRING_HOST_PORT:$SPRING_DOCKER_PORT
     depends_on:
       - "mysql"
