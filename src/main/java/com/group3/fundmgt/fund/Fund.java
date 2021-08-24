@@ -50,6 +50,12 @@ public class Fund {
         this.manager = manager;
     }
 
+    // Mock testing constructor
+    public Fund(Long fundId, String name) {
+        this.fundId = fundId;
+        this.name = name;
+    }
+
     public Fund(String name) {
         this.name = name;
     }

@@ -11,7 +11,7 @@ import java.util.List;
 public class ManagerController {
     private final ManagerService managerService;
 
-
+    @Autowired
     public ManagerController(ManagerService managerService) {
         this.managerService = managerService;
     }
