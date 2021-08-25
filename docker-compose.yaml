@@ -5,16 +5,15 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-mysql
-    env_file: ./.env
     image: mysql:8
     ports:
-      - $MYSQL_HOST_PORT:$MYSQL_DOCKER_PORT
+      - "3306:3306"
     volumes:
       - /docker/emps/mysql:/var/lib/mysql
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
-      MYSQL_DATABASE: $MYSQL_DATABASE
+      MYSQL_ROOT_PASSWORD: c0nygre
+      MYSQL_DATABASE: fundmgt
 
     command: --explicit_defaults_for_timestamp
 
@@ -23,12 +22,11 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-app
-    env_file: ./.env
     image: app:1.0.0
     links:
       - mysql:mysql
     ports:
-      - $SPRING_HOST_PORT:$SPRING_DOCKER_PORT
+      - "8081:8080"
     depends_on:
       - "mysql"
     environment:
