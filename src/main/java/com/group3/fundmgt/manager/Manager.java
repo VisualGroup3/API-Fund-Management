@@ -19,6 +19,9 @@ public class Manager {
     @Column(nullable = false)
     private String lastName;
 
+    @Column(nullable = false)
+    private String Email;
+
     @OneToMany(mappedBy = "manager", cascade = CascadeType.ALL, fetch=FetchType.LAZY)
     private List<Fund> funds;
 
