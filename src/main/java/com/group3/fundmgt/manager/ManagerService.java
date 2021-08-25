@@ -22,7 +22,7 @@ public class ManagerService {
     }
 
     // GET request handler
-    public Manager getManager(Long employeeId) {
+    public Manager getManager(String employeeId) {
         Optional<Manager> manager = this.managerRepository.findById(employeeId);
         if (manager.isEmpty()) {
             throw new NotFoundException("Fund manager with employeeID " + employeeId + " not found.");
@@ -36,7 +36,7 @@ public class ManagerService {
     }
 
     // PUT request handler
-    public void updateManager(Long id, Manager m) {
+    public void updateManager(String id, Manager m) {
         Optional<Manager> managerToUpdateOptional = this.managerRepository.findById(id);
         if (!managerToUpdateOptional.isPresent()) {
             throw new NotFoundException("Fund manager with employeeID " + id + " not found.");
@@ -57,7 +57,7 @@ public class ManagerService {
     }
 
     // DELETE request handler
-    public void deleteManager(Long employeeId) {
+    public void deleteManager(String employeeId) {
         if(this.managerRepository.existsById(employeeId)){
             this.managerRepository.deleteById(employeeId);
         }

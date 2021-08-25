@@ -1,51 +1,51 @@
 package com.group3.fundmgt.Securities;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
 @Table
 public class Security {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer securityId;
-
-    @Column(nullable = false)
     private String symbol;
 
-    public Security(Integer securityId, String symbol) {
-        this.securityId = securityId;
-        this.symbol = symbol;
-    }
+    @Column(nullable = false,length = 10,scale = 2)
+    private BigDecimal price;
 
-    public Security(String symbol) {
-        this.symbol = symbol;
-    }
+    @Column(nullable = false)
+    private String assetClass;
 
     public Security() {
 
     }
 
-    public Integer getSecurityId() {
-        return securityId;
-    }
-
-    public void setSecurityId(Integer securityId) {
-        this.securityId = securityId;
+    public Security(String symbol, BigDecimal price, String assetClass) {
+        this.symbol = symbol;
+        this.price = price;
+        this.assetClass = assetClass;
     }
 
     public String getSymbol() {
         return symbol;
     }
 
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public String getAssetClass() {
+        return assetClass;
+    }
+
     public void setSymbol(String symbol) {
         this.symbol = symbol;
     }
 
-    @Override
-    public String toString() {
-        return "Security{" +
-                "securityId=" + securityId +
-                ", symbol='" + symbol + '\'' +
-                '}';
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public void setAssetClass(String assetClass) {
+        this.assetClass = assetClass;
     }
 }

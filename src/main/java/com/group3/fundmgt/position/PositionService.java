@@ -28,7 +28,7 @@ public class PositionService {
         this.securityRepository=securityRepository;
     }
 
-    public List<Position> getPositionsByFundID(Long fundID){
+    public List<Position> getPositionsByFundID(String fundID){
         return positionRepository.getPositionByFundID(fundID);
     }
 
@@ -71,7 +71,7 @@ public class PositionService {
         }
         Position position=positionOptional.get();
         //check id
-        if (updatePosition.getId() != null && updatePosition.getId() != position.getId()){
+        if (updatePosition.getPositionId() != null && updatePosition.getPositionId() != position.getPositionId()){
             //TODO USe custom exception.
             throw new IllegalStateException("Position ID in path and in request body are different.");
         }
@@ -84,7 +84,5 @@ public class PositionService {
         }
         //quantity
         position.setQuantity(updatePosition.getQuantity());
-        //purchase date
-        position.setDatePurchased(updatePosition.getDatePurchased());
     }
 }

@@ -23,9 +23,9 @@ public class SecurityController {
         return securityService.listAll();
     }
 
-    @GetMapping(path="{securityId}")
-    public Security getSecurities(@PathVariable("securityId") Integer id) {
-        return securityService.get(id);
+    @GetMapping(path="{symble}")
+    public Security getSecurities(@PathVariable("symble") String symble) {
+        return securityService.get(symble);
     }
 
     //Create
@@ -35,10 +35,10 @@ public class SecurityController {
     }
 
     //update
-    @PutMapping(path="{securityId}")
-    public List<Security> updateSecurities(@RequestBody Security security, @PathVariable("securityId") Integer id){
-        Security existSecurity = securityService.get(id);
-        if(security.getSecurityId() == existSecurity.getSecurityId()){
+    @PutMapping(path="{symble}")
+    public List<Security> updateSecurities(@RequestBody Security security, @PathVariable("symble") String symble){
+        Security existSecurity = securityService.get(symble);
+        if(security.getSymbol() == existSecurity.getSymbol()){
             existSecurity.setSymbol(security.getSymbol());
         }
         return securityService.listAll();
@@ -46,8 +46,8 @@ public class SecurityController {
 
     //delete
     @DeleteMapping(path="{securityId}")
-    public List<Security> deleteSecurity(@PathVariable("securityId") Integer id){
-        securityService.delete(id);
+    public List<Security> deleteSecurity(@PathVariable("securityId") String symble){
+        securityService.delete(symble);
         System.out.println("delete successfully");
         return securityService.listAll();
     }

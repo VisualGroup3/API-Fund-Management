@@ -30,15 +30,15 @@ public class SecurityService {
         repo.save(security);
     }
 
-    public Security get(Integer securityId){
-        Optional<Security> security = repo.findById(securityId);
+    public Security get(String symble){
+        Optional<Security> security = repo.findById(symble);
         if (security.isEmpty()) {
-            throw new NotFoundException("Security  with SecurityID " + securityId + " not found.");
+            throw new NotFoundException("Security  with symble " + symble + " not found.");
         }
         return security.get();
     }
 
-    public  void delete(Integer securityId){
-        repo.deleteById(securityId);
+    public  void delete(String symble){
+        repo.deleteById(symble);
     }
 }

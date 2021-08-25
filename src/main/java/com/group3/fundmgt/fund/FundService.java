@@ -21,7 +21,7 @@ public class FundService {
     public List<Fund> getFund(){return fundRepository.findAll();}
 
     // 2.查：根据id查询记录
-    public Fund getFund(Long fundId){
+    public Fund getFund(String fundId){
         Optional<Fund> fund = fundRepository.findById(fundId);
         if (fund.isEmpty()){
             throw new NotFoundException("Fund  with  fundID " + fundId + " not found.");
@@ -35,7 +35,7 @@ public class FundService {
     }
 
     // 4.根据id，删除记录
-    public void deleteById(Long fundId) {
+    public void deleteById(String fundId) {
         if(fundRepository.existsById(fundId)){
             fundRepository.deleteById(fundId);
         }
@@ -45,7 +45,7 @@ public class FundService {
     }
 
     // 5.update
-    public void updateFund(Long id, Fund f) {
+    public void updateFund(String id, Fund f) {
         Optional<Fund> fundToUpdateOptional = this.fundRepository.findById(id);
         if (!fundToUpdateOptional.isPresent()) {
             throw new NotFoundException("Fund  with  fundID " + id + " not found.");

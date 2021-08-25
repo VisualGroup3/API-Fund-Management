@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface SecurityRepository extends JpaRepository<Security, Integer> {
+public interface SecurityRepository extends JpaRepository<Security, String> {
     @Query(value = "SELECT s FROM Security s WHERE symbol=?1")
     public Optional<Security> findSecuritiesBySymbol(String symbol);
 }
