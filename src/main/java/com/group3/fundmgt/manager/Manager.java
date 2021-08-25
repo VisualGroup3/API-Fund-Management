@@ -19,6 +19,7 @@ public class Manager {
     @Column(nullable = false)
     private String lastName;
 
+
     @OneToMany(mappedBy = "manager", cascade = CascadeType.ALL, fetch=FetchType.LAZY)
     private List<Fund> funds;
 
