@@ -10,8 +10,7 @@ import java.util.List;
 @Table
 public class Manager {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long employeeId;
+    private String employeeId;
 
     @Column(nullable = false)
     private String firstName;
@@ -27,25 +26,29 @@ public class Manager {
 
     public Manager() { }
 
-    public Manager(Long employeeId, String firstName, String lastName, List<Fund> funds) {
+    public Manager(String employeeId, String firstName, String lastName, String email, List<Fund> funds) {
         this.employeeId = employeeId;
         this.firstName = firstName;
         this.lastName = lastName;
+        Email = email;
         this.funds = funds;
     }
 
-    public Manager(String firstName, String lastName, List<Fund> funds) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.funds = funds;
-    }
 
-    public Long getEmployeeId() {
+    public String getEmployeeId() {
         return employeeId;
     }
 
-    public void setEmployeeId(Long employeeId) {
+    public String getEmail() {
+        return Email;
+    }
+
+    public void setEmployeeId(String employeeId) {
         this.employeeId = employeeId;
+    }
+
+    public void setEmail(String email) {
+        Email = email;
     }
 
     public String getFirstName() {

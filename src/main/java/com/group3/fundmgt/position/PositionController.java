@@ -23,7 +23,7 @@ public class PositionController {
     }
 
     @GetMapping
-    public List<Position> getPositionsByFundID(@RequestParam Long fundID){
+    public List<Position> getPositionsByFundID(@RequestParam String fundID){
         List<Position> positions=positionService.getPositionsByFundID(fundID);
 //        for(Position p:positions){
 //            System.out.println(p.toString());

@@ -22,7 +22,7 @@ public class ManagerController {
     }
     
     @GetMapping("{employeeId}")
-    public Manager getManager(@PathVariable("employeeId") Long employeeId) {
+    public Manager getManager(@PathVariable("employeeId") String employeeId) {
         return managerService.getManager(employeeId);
     }
 
@@ -33,13 +33,13 @@ public class ManagerController {
     }
 
     @PutMapping("{employeeId}")
-    public void updateManager(@PathVariable("employeeId") Long employeeId, @RequestBody Manager manager) {
+    public void updateManager(@PathVariable("employeeId") String employeeId, @RequestBody Manager manager) {
          managerService.updateManager(employeeId, manager);
     }
 
 
     @DeleteMapping("{employeeId}")
-    public void deleteManager(@PathVariable("employeeId") Long employeeId) {
+    public void deleteManager(@PathVariable("employeeId") String employeeId) {
          managerService.deleteManager(employeeId);
 
     }

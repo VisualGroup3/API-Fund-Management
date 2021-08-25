@@ -23,7 +23,7 @@ public class FundController {
 
     // 2.查：根据id查询记录
     @GetMapping(value = "{fundId}")
-    public Fund getFund(@PathVariable("fundId") Long fundId){
+    public Fund getFund(@PathVariable("fundId") String fundId){
         System.out.println(fundService.getFund(fundId).toString());
         return fundService.getFund(fundId);
     }
@@ -39,13 +39,13 @@ public class FundController {
 
     // 4.根据id，删除记录
     @DeleteMapping(value = "{fundId}")
-    public void deleteById(@PathVariable("fundId") Long fundId){
+    public void deleteById(@PathVariable("fundId") String fundId){
          fundService.deleteById(fundId);
     
     }
 
     @PutMapping("{fundId}")
-    public void updateFund(@PathVariable("fundId") Long id,
+    public void updateFund(@PathVariable("fundId") String id,
                               @RequestBody Fund fund) {
         fundService.updateFund(id, fund);
     }
