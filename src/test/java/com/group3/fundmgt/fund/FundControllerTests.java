@@ -69,18 +69,18 @@ public class FundControllerTests {
     @Autowired
     MockMvc mockMvc;
 
-    List<Fund> defaultFunds = List.of(
-            new Fund(1L, "technology select sector fund"),
-            new Fund( 2L, "communication services select sector fund"),
-            new Fund( 3L, "industrial select sector fund")
-    );
-
-    @Test
-    public void testGetFundSuccess() throws Exception {
-        when(fundService.getFund(1L)).thenReturn(defaultFunds.get(0));
-        mockMvc.perform(
-                MockMvcRequestBuilders.get("/api/v1/funds/1"))
-                .andExpect(status().isOk());
-    }
+//    List<Fund> defaultFunds = List.of(
+//            new Fund(1L, "technology select sector fund"),
+//            new Fund( 2L, "communication services select sector fund"),
+//            new Fund( 3L, "industrial select sector fund")
+//    );
+//
+//    @Test
+//    public void testGetFundSuccess() throws Exception {
+//        when(fundService.getFund(1L)).thenReturn(defaultFunds.get(0));
+//        mockMvc.perform(
+//                MockMvcRequestBuilders.get("/api/v1/funds/1"))
+//                .andExpect(status().isOk());
+//    }
 
 }
