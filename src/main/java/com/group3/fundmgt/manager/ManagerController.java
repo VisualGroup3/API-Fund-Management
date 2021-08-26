@@ -1,6 +1,9 @@
 package com.group3.fundmgt.manager;
 
 
+import com.alibaba.fastjson.JSONObject;
+import com.group3.fundmgt.fund.Fund;
+import com.group3.fundmgt.fund.FundAssetValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,12 +13,9 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/v1/managers")
 public class ManagerController {
-    private final ManagerService managerService;
 
     @Autowired
-    public ManagerController(ManagerService managerService) {
-        this.managerService = managerService;
-    }
+    ManagerService managerService;
     
     @GetMapping 
     public List<Manager> getManager() {
@@ -45,4 +45,19 @@ public class ManagerController {
 
     }
 
+    @GetMapping(value = "{employeeId}/value")
+    public JSONObject getManagerValueByAsset(@PathVariable("employeeId") String employeeId){
+        List<ManagerAssetValue> managerAssetValueList=managerService.getManagerValueByAsset(employeeId);
+        long totalValue=0;
+        for(ManagerAssetValue v:managerAssetValueList){
+            totalValue+=v.getValue();
+        }
+        JSONObject result=new JSONObject();
+        Manager manager=managerService.getManager(employeeId);
+        result.put("manager",manager);
+        result.put("assetsValue",managerAssetValueList);
+        result.put("totalValue",totalValue);
+        System.out.println(result.toJSONString());
+        return result;
+    }
 }

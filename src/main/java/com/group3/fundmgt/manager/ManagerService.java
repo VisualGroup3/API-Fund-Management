@@ -3,15 +3,22 @@ package com.group3.fundmgt.manager;
 import com.alibaba.fastjson.JSONObject;
 import com.group3.fundmgt.exception.BadRequestException;
 import com.group3.fundmgt.exception.NotFoundException;
+import com.group3.fundmgt.fund.Fund;
+import com.group3.fundmgt.fund.FundAssetValue;
+import com.group3.fundmgt.fund.FundService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class ManagerService {
 
+    @Autowired
+    FundService fundService;
     private final ManagerRepository managerRepository;
 
     @Autowired
@@ -68,10 +75,18 @@ public class ManagerService {
         }
     }
 
-    public JSONObject getManagerValueByAsset(String employeeId){
-        //找到这个manager下面所有fund
-        JSONObject result=new JSONObject();
-        return result;
+    public List<ManagerAssetValue> getManagerValueByAsset(String employeeId){
+        List list=managerRepository.getValueGroupByAssetClass(employeeId);
+        List<ManagerAssetValue> managerAssetValueList=new ArrayList<>();
+        for(Object row:list){
+            ManagerAssetValue managerAssetValue=new ManagerAssetValue();
+            Object[] cells = (Object[]) row;
+            managerAssetValue.setAssetClass(String.valueOf(cells[1]));
+            BigDecimal bigDecimal=new BigDecimal(String.valueOf(cells[0]));
+            managerAssetValue.setValue(bigDecimal.longValue());
+            managerAssetValueList.add(managerAssetValue);
+        }
+        return managerAssetValueList;
     }
 
 
