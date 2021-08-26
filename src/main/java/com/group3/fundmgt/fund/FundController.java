@@ -1,10 +1,12 @@
 package com.group3.fundmgt.fund;
 
+import com.alibaba.fastjson.JSONObject;
 import com.group3.fundmgt.manager.Manager;
 import com.group3.fundmgt.position.Position;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.PrintWriter;
 import java.util.List;
 
 @RestController
@@ -41,12 +43,18 @@ public class FundController {
     @DeleteMapping(value = "{fundId}")
     public void deleteById(@PathVariable("fundId") String fundId){
          fundService.deleteById(fundId);
-    
+
     }
 
     @PutMapping("{fundId}")
     public void updateFund(@PathVariable("fundId") String id,
                               @RequestBody Fund fund) {
         fundService.updateFund(id, fund);
+    }
+
+    @GetMapping(value = "{fundId}/value")
+    public JSONObject getFundValueByAsset(@PathVariable("fundId") String id){
+        JSONObject jsonObject=fundService.getFundValueByAsset(id);
+        return jsonObject;
     }
 }

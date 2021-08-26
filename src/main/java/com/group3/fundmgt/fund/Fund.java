@@ -12,7 +12,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "fund")
-
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 public class Fund {
     // 1.建表
     @Id
@@ -42,6 +42,7 @@ public class Fund {
     //拥有mappedBy注解的实体类为关系被维护端
     //mappedBy="fund"中的fund是Position中的fund属性
     private List<Position> positionList;
+
 
     //避免无限递归//
     @JsonIgnore

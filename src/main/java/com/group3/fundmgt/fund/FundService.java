@@ -1,10 +1,13 @@
 package com.group3.fundmgt.fund;
 
+import com.alibaba.fastjson.JSONObject;
 import com.group3.fundmgt.exception.BadRequestException;
 import com.group3.fundmgt.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -60,6 +63,28 @@ public class FundService {
             fundToUpdate.setName(f.getName());
         }
         this.fundRepository.save(fundToUpdate);
+    }
+
+    public JSONObject getFundValueByAsset(String fundId){
+        List list=fundRepository.getValueGroupByAssetClass(fundId);
+        List<FundAssetValue> fundAssetValueList=new ArrayList<>();
+        long totalValue=0;
+        for(Object row:list){
+            FundAssetValue fundAssetValue=new FundAssetValue();
+            Object[] cells = (Object[]) row;
+            fundAssetValue.setAssetClass(String.valueOf(cells[1]));
+            BigDecimal bigDecimal=new BigDecimal(String.valueOf(cells[0]));
+            fundAssetValue.setValue(bigDecimal.longValue());
+            totalValue+=fundAssetValue.getValue();
+            fundAssetValueList.add(fundAssetValue);
+        }
+        JSONObject result=new JSONObject();
+        Fund fund=fundRepository.getById(fundId);
+        result.put("fund",fund);
+        result.put("assetsValue",fundAssetValueList);
+        result.put("totalValue",totalValue);
+        System.out.println(result.toJSONString());
+        return result;
     }
 
 }

@@ -11,4 +11,5 @@ import java.util.Optional;
 public interface PositionRepository extends JpaRepository<Position,Long> {
     @Query("SELECT p from Position p where p.fund.fundId=?1")
     public List<Position> getPositionByFundID(String fundID);
+
 }

@@ -1,5 +1,6 @@
 package com.group3.fundmgt.manager;
 
+import com.alibaba.fastjson.JSONObject;
 import com.group3.fundmgt.exception.BadRequestException;
 import com.group3.fundmgt.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,7 +68,11 @@ public class ManagerService {
         }
     }
 
-
+    public JSONObject getManagerValueByAsset(String employeeId){
+        //找到这个manager下面所有fund
+        JSONObject result=new JSONObject();
+        return result;
+    }
 
 
 }

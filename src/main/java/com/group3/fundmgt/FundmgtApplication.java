@@ -2,6 +2,7 @@ package com.group3.fundmgt;
 
 
 import com.group3.fundmgt.fund.Fund;
+import com.group3.fundmgt.fund.FundAssetValue;
 import com.group3.fundmgt.fund.FundRepository;
 
 import com.group3.fundmgt.Securities.Security;
@@ -18,6 +19,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.core.annotation.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -33,6 +35,17 @@ public class FundmgtApplication {
     @Bean
     CommandLineRunner commandLineRunner(ManagerRepository managerRepository, PositionRepository positionRepository, SecurityRepository securityRepository,FundRepository fundRepository) {
         return args -> {
+
+//            List list=fundRepository.getValueGroupByAssetClass("GF001");
+//            List<FundAssetValue> fundAssetValueList=new ArrayList<>();
+//            for(Object row:list){
+//                FundAssetValue fundAssetValue=new FundAssetValue();
+//                Object[] cells = (Object[]) row;
+//                fundAssetValue.setAssetClass(String.valueOf(cells[1]));
+//                BigDecimal bigDecimal=new BigDecimal(String.valueOf(cells[0]));
+//                fundAssetValue.setValue(bigDecimal.longValue());
+//                System.out.println(fundAssetValue);
+//            }
 //            /*存入manager*/
 //            List<Manager> managers = List.of(
 //                    new Manager("CG1111","Chris", "Gardner","939015806@qq.com",new ArrayList<>())
