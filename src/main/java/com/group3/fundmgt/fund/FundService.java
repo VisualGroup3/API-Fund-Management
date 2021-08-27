@@ -79,5 +79,18 @@ public class FundService {
 
         return fundAssetValueList;
     }
+    public List<FundSecurityValue> getFundValueBySecurity(String fundId){
+        List list=fundRepository.getValueGroupBySecurity(fundId);
+        List<FundSecurityValue> fundSecurityValueList=new ArrayList<>();
+        for(Object row:list){
+            FundSecurityValue fundSecurityValue=new FundSecurityValue();
+            Object[] cells = (Object[]) row;
+            fundSecurityValue.setSecuritySymble(String.valueOf(cells[1]));
+            BigDecimal bigDecimal=new BigDecimal(String.valueOf(cells[0]));
+            fundSecurityValue.setValue(bigDecimal.longValue());
+            fundSecurityValueList.add(fundSecurityValue);
+        }
 
+        return fundSecurityValueList;
+    }
 }

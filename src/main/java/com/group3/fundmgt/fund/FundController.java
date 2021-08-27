@@ -56,6 +56,7 @@ public class FundController {
     @GetMapping(value = "{fundId}/value")
     public JSONObject getFundValueByAsset(@PathVariable("fundId") String id){
         List<FundAssetValue> fundAssetValueList=fundService.getFundValueByAsset(id);
+        List<FundSecurityValue> fundSecurityValueList=fundService.getFundValueBySecurity(id);
         long totalValue=0;
         for(FundAssetValue v:fundAssetValueList){
             totalValue+=v.getValue();
@@ -64,6 +65,7 @@ public class FundController {
         Fund fund=fundService.getFund(id);
         result.put("fund",fund);
         result.put("assetsValue",fundAssetValueList);
+        result.put("securityValue",fundSecurityValueList);
         result.put("totalValue",totalValue);
         System.out.println(result.toJSONString());
         return result;

@@ -14,4 +14,8 @@ public interface FundRepository extends JpaRepository<Fund,String> {
             value = "select sum(value),asset_class from (SELECT asset_class,price*quantity value " +
             "FROM position where position.fund_id=?1) a group by asset_class")
     public List getValueGroupByAssetClass(String fundID);
+
+    @Query(nativeQuery = true,
+            value ="select sum(quantity*price) value,security_symbol from position where fund_id=?1 group by security_symbol" )
+    public List getValueGroupBySecurity(String fundID);
 }
