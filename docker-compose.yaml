@@ -31,3 +31,7 @@ services:
       - "mysql"
     environment:
       DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: fundmgt
+      DB_USERNAME: root
+      DB_PASSWORD: c0nygre
