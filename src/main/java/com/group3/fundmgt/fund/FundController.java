@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.PrintWriter;
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping(path = "/api/v1/funds")
 public class FundController {
