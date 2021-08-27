@@ -1,6 +1,6 @@
 # API-Fund-Management
 
-Source code for Group 3's API Hackathon
+Source code for Fantastic4's API Hackathon
 
 ## Containerization 
 
